@@ -1,0 +1,38 @@
+name: Terraform Automation with Destroy
+ 
+on:
+  workflow_dispatch: 
+
+jobs:
+  terraform:
+    runs-on: ubuntu-latest
+ 
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v2.0.3
+
+      - name: Terraform Init
+        run: terraform init
+
+      - name: Terraform Plan
+        run: terraform plan
+        env:
+          ACCESS_KEY: ${{ secrets.ACCESS_KEY }}
+          SECRET_KEY: ${{ secrets.SECRET_KEY }}
+
+      - name: Terraform Apply
+        if: github.ref == 'refs/heads/main'  # Only apply for pushes to 'main'
+        run: terraform apply -auto-approve
+        env:
+          ACCESS_KEY: ${{ secrets.ACCESS_KEY }}
+          SECRET_KEY: ${{ secrets.SECRET_KEY }}
+
+      - name: Terraform Destroy
+        if: github.event_name == 'workflow_dispatch'  # Run only on manual trigger
+        run: terraform destroy -auto-approve
+        env:
+          ACCESS_KEY: ${{ secrets.ACCESS_KEY }}
+          SECRET_KEY: ${{ secrets.SECRET_KEY }}
