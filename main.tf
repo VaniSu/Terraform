@@ -22,7 +22,7 @@ resource "aws_instance" "instance" {
 }
 
 resource "aws_s3_bucket" "example" {
-  bucket = "my-tf-test-bucket"
+  bucket = "my-tf-test-bucket-123"
 
   tags = {
     Name        = "My bucket"
