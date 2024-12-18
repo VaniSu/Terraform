@@ -1,5 +1,5 @@
 resource "aws_s3_bucket" "terraform_state" {
-  region   = "eu-central-1"
+
   bucket   = "bucket6718787hgv"
   acl      = "private"
  
@@ -16,7 +16,7 @@ resource "aws_s3_bucket" "terraform_state" {
 # DynamoDB Table for State Locking
 resource "aws_dynamodb_table" "terraform_lock" {
   name         = "terraform-lock-table"
-  region       = "eu-central-1"
+ 
   billing_mode = "PAY_PER_REQUEST"
   hash_key     = "LockID"
  
