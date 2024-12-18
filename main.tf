@@ -19,19 +19,19 @@ provider "aws" {
 }
 
 module "backend" {
-  source      = "https://github.com/VaniSu/Terraform/tree/main/backend"
+  source      = "./backend"
  
 }
  
 # Module A
 module "Compute" {
-  source      = "https://github.com/VaniSu/Terraform/tree/main/compute"
+  source      = "./compute"
   
 }
  
 # Module B
 module "network" {
-  source      = "https://github.com/VaniSu/Terraform/tree/main/networking"
+  source      = "./networking"
  
 }
 
