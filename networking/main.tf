@@ -1,25 +1,3 @@
-terraform {
-  backend "s3" {
-    bucket         = "bucket6718787hgv"
-    key            = "networking/terraform.tfstate"
-    region         = "eu-central-1"
-    dynamodb_table = "terraform-lock-table"
-    encrypt        = true
-  }
-  required_providers {
-    aws = {
-      source  = "hashicorp/aws"
-      version = "~> 5.0"
-    }
-  }
-}
-
-# Configure the AWS Provider
-provider "aws" {
-  region = "us-east-1"
-}
-
-# Create a VPC
 resource "aws_vpc" "vpc" {
   cidr_block = "10.0.0.0/16"
 
