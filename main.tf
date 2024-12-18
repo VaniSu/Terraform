@@ -13,29 +13,6 @@ provider "aws" {
   region = "eu-central-1"
 }
 
-provider "aws" {
-  alias = "us-east-1"
-  region = "us-east-1"
-}
-
-resource "aws_instance" "instance" {
-  provider      = aws.us-east-1
-  ami           = "ami-0453ec754f44f9a4a"
-  instance_type = "t2.micro"
-
-  tags = {
-    Name = "HelloWorld"
-  }
-}
-
-resource "aws_s3_bucket" "example" {
-  provider = aws.eu-central-1
-  bucket   = "bucket6718787hgv"
-
-  tags = {
-    Name        = "My bucket"
-  }
-}
 
 resource "aws_s3_bucket" "terraform_state" {
   provider = aws.eu-central-1
@@ -70,15 +47,7 @@ resource "aws_dynamodb_table" "terraform_lock" {
   }
 }
 
-terraform {
-  backend "s3" {
-    bucket         = "bucket6718787hgv"
-    key            = "compute/terraform.tfstate"
-    region         = "eu-central-1"
-    dynamodb_table = "terraform-lock-table"
-    encrypt        = true
-  }
-}
+
 
 
 
