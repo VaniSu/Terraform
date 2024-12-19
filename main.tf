@@ -3,7 +3,7 @@ terraform {
     bucket         = "bucketexists"
     key            = "networking/terraform.tfstate"
     region         = "us-east-1"
-    dynamodb_table = "terraform-lock-table"
+    dynamodb_table = "lock-table"
     encrypt        = true
   }
   required_providers {
